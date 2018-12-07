@@ -1,8 +1,11 @@
 var Anzeiger='0';
 var Ergebnis='';
+var zahl1="";
 var stopRZ=false;
 var stopKomma=false;
 var rechenpfad="";
+var verlauf="";
+var eintragHistory;
 
 function zeigeClick (n1) 
 {	
@@ -10,8 +13,10 @@ function zeigeClick (n1)
 	  {
 		rechenpfad=rechenpfad+Anzeiger;
 		Ergebnis=eval(rechenpfad);
+		$("#history").html(verlauf + Anzeiger+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------");
+		verlauf=verlauf + Anzeiger+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------";
 		Anzeiger=Ergebnis;
-		document.getElementById("AnzeigeFlaeche").innerHTML = Anzeiger;
+		$("#AnzeigeFlaeche").html(Anzeiger);
 		rechenpfad="";
 		Ergebnis='';
 	  } 
@@ -23,9 +28,14 @@ function zeigeClick (n1)
 	if ((Ergebnis=='')&&(n1!='=')) 
 	  {
 		Anzeiger=Anzeiger + n1;
-		document.getElementById("AnzeigeFlaeche").innerHTML = rechenpfad+Anzeiger ;
+		$("#AnzeigeFlaeche").html(rechenpfad+Anzeiger) ;
 		stopRZ=false;
 	  } 
+	  if (eintragHistory!="")
+	  {
+	  	verlauf=verlauf+"<br>";
+	  	eintragHistory="";
+	  }
 }
 
 function zeigeOperator (n2) 
@@ -33,7 +43,10 @@ function zeigeOperator (n2)
 	if (stopRZ==false) 
 		{
 		  rechenpfad=rechenpfad+Anzeiger + n2;
-		  document.getElementById("AnzeigeFlaeche").innerHTML = rechenpfad;
+		  $("#AnzeigeFlaeche").html(rechenpfad);
+		  $("#history").html(verlauf + Anzeiger+n2);
+		  verlauf=verlauf + Anzeiger+n2;
+		  eintragHistory=Anzeiger+n2;
 		  Anzeiger='';
 		  stopRZ=true;
 		} 
@@ -42,7 +55,12 @@ function zeigeOperator (n2)
 		{	
 		  rechenpfad=rechenpfad.slice(0, rechenpfad.length-1);
 		  rechenpfad=rechenpfad + n2;
-		  document.getElementById("AnzeigeFlaeche").innerHTML = rechenpfad ;
+		  $("#AnzeigeFlaeche").html(rechenpfad);
+		  verlauf=verlauf.slice(0, verlauf.length-1);
+		  $("#history").html(verlauf + Anzeiger+n2);
+		  verlauf=verlauf + n2;
+		 
+		  
 	  	}
 }
 
@@ -50,7 +68,7 @@ function zeigeKomma (n3)
 {
 	if (stopKomma==false)
 	Anzeiger=Anzeiger + n3;
-	document.getElementById("AnzeigeFlaeche").innerHTML=Anzeiger;
+	$("#AnzeigeFlaeche").html(Anzeiger);
 	stopKomma=true;
 }
 
@@ -66,16 +84,16 @@ function ClearAC ()
 
 (function() 
 	{	
-	  document.getElementById("BTNAC").addEventListener("click", function AC(){
-	  document.getElementById("AnzeigeFlaeche").innerHTML= "0";	
+	  $("#BTNAC").click("click", function AC(){
+	  $("#AnzeigeFlaeche").html("0");	
 	  ClearAC();
 	});
-	  document.getElementById("BTNProzent").addEventListener("click", function() {
-	  Anzeiger=parseInt(Anzeiger)/100;
-	  document.getElementById("AnzeigeFlaeche").innerHTML = rechenpfad+Anzeiger;
+	  $("#BTNProzent").click("click", function() {
+	  Anzeiger=parseFloat(Anzeiger)/100;
+	  $("#AnzeigeFlaeche").html(rechenpfad+Anzeiger);
 	});	
-	  document.getElementById("BTNNegate").addEventListener("click", function() {
-	  Anzeiger=parseInt(Anzeiger)*(-1);
-	  document.getElementById("AnzeigeFlaeche").innerHTML=rechenpfad+Anzeiger;
+	  $("#BTNNegate").click("click", function() {
+	  Anzeiger=parseFloat(Anzeiger)*(-1);
+	  $("#AnzeigeFlaeche").html(rechenpfad+Anzeiger);
 	});
 })();
