@@ -13,8 +13,8 @@ function zeigeClick (n1)
 	  {
 		rechenpfad=rechenpfad+Anzeiger;
 		Ergebnis=eval(rechenpfad);
-		$("#history").html(verlauf + Anzeiger+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------");
-		verlauf=verlauf + Anzeiger+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------";
+		$("#history").html(verlauf + Anzeiger+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------"+"<br>");
+		verlauf=verlauf + Anzeiger+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------"+"<br>";
 		Anzeiger=Ergebnis;
 		$("#AnzeigeFlaeche").html(Anzeiger);
 		rechenpfad="";
