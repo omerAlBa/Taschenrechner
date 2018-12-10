@@ -6,19 +6,23 @@ var stopKomma=false;
 var rechenpfad="";
 var verlauf="";
 var eintragHistory;
+var Operator;
 
 function zeigeClick (n1) 
 {	
 	if (n1=='=') 
 	  {
+		
+		if (rechenpfad==Ergebnis)
+		{
+			rechenpfad=rechenpfad+Operator+Anzeiger;
+		} else
 		rechenpfad=rechenpfad+Anzeiger;
 		Ergebnis=eval(rechenpfad);
-		$("#history").html(verlauf + Anzeiger+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------");
-		verlauf=verlauf + Anzeiger+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------";
-		Anzeiger=Ergebnis;
+		$("#history").html(verlauf + Anzeiger+Operator+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------"+"<br>");
+		verlauf=verlauf + Anzeiger+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------"+"<br>";
 		$("#AnzeigeFlaeche").html(Anzeiger);
-		rechenpfad="";
-		Ergebnis='';
+		rechenpfad=Ergebnis;
 	  } 
 	else
 	if (Anzeiger =='0') 
@@ -28,7 +32,7 @@ function zeigeClick (n1)
 	if ((Ergebnis=='')&&(n1!='=')) 
 	  {
 		Anzeiger=Anzeiger + n1;
-		$("#AnzeigeFlaeche").html(rechenpfad+Anzeiger) ;
+		$("#AnzeigeFlaeche").html(Anzeiger) ;
 		stopRZ=false;
 	  } 
 	  if (eintragHistory!="")
@@ -43,24 +47,22 @@ function zeigeOperator (n2)
 	if (stopRZ==false) 
 		{
 		  rechenpfad=rechenpfad+Anzeiger + n2;
-		  $("#AnzeigeFlaeche").html(rechenpfad);
 		  $("#history").html(verlauf + Anzeiger+n2);
 		  verlauf=verlauf + Anzeiger+n2;
 		  eintragHistory=Anzeiger+n2;
 		  Anzeiger='';
 		  stopRZ=true;
+		  Operator=n2;
 		} 
 	else
 	if (stopRZ==true)
 		{	
 		  rechenpfad=rechenpfad.slice(0, rechenpfad.length-1);
 		  rechenpfad=rechenpfad + n2;
-		  $("#AnzeigeFlaeche").html(rechenpfad);
 		  verlauf=verlauf.slice(0, verlauf.length-1);
 		  $("#history").html(verlauf + Anzeiger+n2);
-		  verlauf=verlauf + n2;
-		 
-		  
+		  verlauf=verlauf + n2;	 
+		  Operator=n2; 
 	  	}
 }
 
@@ -90,10 +92,10 @@ function ClearAC ()
 	});
 	  $("#BTNProzent").click("click", function() {
 	  Anzeiger=parseFloat(Anzeiger)/100;
-	  $("#AnzeigeFlaeche").html(rechenpfad+Anzeiger);
+	 $("#AnzeigeFlaeche").html(Anzeiger);
 	});	
 	  $("#BTNNegate").click("click", function() {
 	  Anzeiger=parseFloat(Anzeiger)*(-1);
-	  $("#AnzeigeFlaeche").html(rechenpfad+Anzeiger);
+	 $("#AnzeigeFlaeche").html(Anzeiger);
 	});
 })();
