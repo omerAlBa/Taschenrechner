@@ -21,7 +21,7 @@ function zeigeClick (n1)
 		Ergebnis=eval(rechenpfad);
 		$("#history").html(verlauf + Anzeiger+Operator+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------"+"<br>");
 		verlauf=verlauf + Anzeiger+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------"+"<br>";
-		$("#AnzeigeFlaeche").html(Anzeiger);
+		$("#AnzeigeFlaeche").html(Ergebnis);
 		rechenpfad=Ergebnis;
 	  } 
 	else
