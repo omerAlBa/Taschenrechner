@@ -116,4 +116,4 @@ function mehrfachRechner()
 	  Anzeiger=parseFloat(Anzeiger)*(-1);
 	 $("#AnzeigeFlaeche").html(Anzeiger);
 	});
-})();
+})(); 
