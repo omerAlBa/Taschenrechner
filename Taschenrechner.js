@@ -1,6 +1,5 @@
 var Anzeiger='0';
 var Ergebnis='';
-var zahl1="";
 var stopRZ=false;
 var stopKomma=false;
 var rechenpfad="";
@@ -31,6 +30,7 @@ function zeigeClick (n1)
 	  }
 	if (n1!='=') 
 	  {
+	  	mehrfachRechner();
 		Anzeiger=Anzeiger + n1;
 		$("#AnzeigeFlaeche").html(Anzeiger) ;
 		stopRZ=false;
@@ -45,11 +45,7 @@ function zeigeClick (n1)
 
 function zeigeOperator (n2) 
 {	
-	if (Ergebnis!="")
-	{
-		Anzeiger=Ergebnis
-		Ergebnis="";
-	}
+	mehrfachRechner();
 	if (stopRZ==false) 
 		{
 		  rechenpfad=rechenpfad+Anzeiger + n2;
@@ -89,27 +85,34 @@ function ClearAC ()
 	stopRZ=false;
 	stopKomma=false;
 }
+
 function scrollTOBottom()
 {
-/*var	history=document.getElementById("history");
-	history = document.getElementById("history");
-	history.scrollTop=history.scrollHeight;*/
-//$("#history").scrollTop($("#history")[0].scrollHeight);
 $("#history").scrollTop($("#history")[0].scrollHeight);
 }
 
+function mehrfachRechner()
+{
+	if (Ergebnis!="")
+		{
+			Anzeiger=Ergebnis;
+			Ergebnis="";
+		}
+}
 
 (function() 
-	{	
+	{		
 	  $("#BTNAC").click("click", function AC(){
 	  $("#AnzeigeFlaeche").html("0");	
 	  ClearAC();
 	});
 	  $("#BTNProzent").click("click", function() {
+	  	mehrfachRechner();
 	  Anzeiger=parseFloat(Anzeiger)/100;
 	 $("#AnzeigeFlaeche").html(Anzeiger);
 	});	
 	  $("#BTNNegate").click("click", function() {
+	  	mehrfachRechner();
 	  Anzeiger=parseFloat(Anzeiger)*(-1);
 	 $("#AnzeigeFlaeche").html(Anzeiger);
 	});
