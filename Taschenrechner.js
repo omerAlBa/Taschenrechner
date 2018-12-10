@@ -91,6 +91,10 @@ function ClearAC ()
 }
 function scrollTOBottom()
 {
+/*var	history=document.getElementById("history");
+	history = document.getElementById("history");
+	history.scrollTop=history.scrollHeight;*/
+//$("#history").scrollTop($("#history")[0].scrollHeight);
 $("#history").scrollTop($("#history")[0].scrollHeight);
 }
 
