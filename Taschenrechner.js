@@ -13,23 +13,23 @@ function zeigeClick (n1)
 	if (n1=='=') 
 	  {
 		
-		if (rechenpfad==Ergebnis)
+		if (rechenpfad=="")
 		{
-			rechenpfad=rechenpfad+Operator+Anzeiger;
+			rechenpfad=Ergebnis+Operator+Anzeiger;
 		} else
 		rechenpfad=rechenpfad+Anzeiger;
 		Ergebnis=eval(rechenpfad);
 		$("#history").html(verlauf + Anzeiger+Operator+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------"+"<br>");
 		verlauf=verlauf + Anzeiger+"<br>"+"__________"+"<br>"+Ergebnis+"<br>"+"--------------"+"<br>";
 		$("#AnzeigeFlaeche").html(Ergebnis);
-		rechenpfad=Ergebnis;
+		rechenpfad="";
 	  } 
 	else
 	if (Anzeiger =='0')  
 	  {
 		Anzeiger='';
 	  }
-	if ((Ergebnis=='')&&(n1!='=')) 
+	if (n1!='=') 
 	  {
 		Anzeiger=Anzeiger + n1;
 		$("#AnzeigeFlaeche").html(Anzeiger) ;
@@ -40,10 +40,16 @@ function zeigeClick (n1)
 	  	verlauf=verlauf+"<br>";
 	  	eintragHistory="";
 	  }
+	  		scrollTOBottom();
 }
 
 function zeigeOperator (n2) 
 {	
+	if (Ergebnis!="")
+	{
+		Anzeiger=Ergebnis
+		Ergebnis="";
+	}
 	if (stopRZ==false) 
 		{
 		  rechenpfad=rechenpfad+Anzeiger + n2;
@@ -83,6 +89,11 @@ function ClearAC ()
 	stopRZ=false;
 	stopKomma=false;
 }
+function scrollTOBottom()
+{
+$("#history").scrollTop($("#history")[0].scrollHeight);
+}
+
 
 (function() 
 	{	
