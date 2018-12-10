@@ -25,7 +25,7 @@ function zeigeClick (n1)
 		rechenpfad=Ergebnis;
 	  } 
 	else
-	if (Anzeiger =='0') 
+	if (Anzeiger =='0')  
 	  {
 		Anzeiger='';
 	  }
